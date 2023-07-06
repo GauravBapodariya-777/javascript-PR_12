@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>DarkPan - Bootstrap 5 Admin Template</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-secondary navbar-dark">
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
+                </a>
+                <div class="navbar-nav w-100">
+                    <a href="index.html" class="nav-item nav-link active my-2"><i
+                            class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                </div>
+                <div class="navbar-nav w-100">
+                    <a href="index.html" class="nav-item nav-link active my-2"><i
+                            class="fa fa-tachometer-alt me-2"></i>Team
+                        Information</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <form class="d-none d-md-flex ms-4">
+                    <input class="form-control bg-dark border-0" type="search" placeholder="Search">
+                </form>
+                <div class="navbar-nav align-items-center ms-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-envelope me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Message</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="img/user.jpg" alt=""
+                                        style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="img/user.jpg" alt=""
+                                        style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="img/user.jpg" alt=""
+                                        style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">See all message</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-bell me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Notificatin</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Profile updated</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">New user added</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Password changed</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">See all notifications</a>
+                        </div>
+                    </div>
+                    <input type="button" onclick="logout()" value="Log-Out" class="btn ms-4">
+                </div>
+            </nav>
+            <div class="m-3 data">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email Address</th>
+                            <th>Password</th>
+                            <th>Role </th>
+                        </tr>
+                    </thead>
+                    <tbody id="record"></tbody>
+                </table>
+            </div>
+        </div>
+        <script src="watchman.js"></script>
+        <script type="text/javascript">
+            const viewData = () => {
+                let record = JSON.parse(localStorage.getItem('register')) || [];
+                let data = JSON.parse(localStorage.getItem('userLogin'));
+                let tbl = "";
+                // for (let i in record) {
+                // if (record[i].role == "admin") {
+                record.map((v) => {
+                    const { id, name, email, password, role } = v;
+                    tbl += `
+                        <tr>
+                            <td>${id}</td>
+                            <td>${name}</td>
+                            <td>${email}</td>
+                            <td>${password}</td>`;
+                    if (role == "admin") {
+                        tbl += `
+                            <td><button class="btn next" id="admin" onclick="au(${id})">Admin</button></td>`;
+                    } else {
+                        tbl += `
+                            <td><button class="btn next" id="user" onclick="au(${id})">User</button></td>`;
+                    }
+                    tbl += `</tr>`;
+                })
+                document.getElementById('record').innerHTML = tbl;
+            }
+            // else {
+            //     data.map((v) => {
+            //         const { id, name, email, password, role } = v;
+            //         tbl += `
+            //         <tr>
+            //             <td>${id}</td>
+            //             <td>${name}</td>
+            //             <td>${email}</td>
+            //             <td>${password}</td>
+            //         </tr>`;
+            //     })
+            // }
+            // }
+            // };
+            viewData();
+            const au = (id) => {
+                let alldata = JSON.parse(localStorage.getItem('register'));
+                for (let i in alldata) {
+                    if (alldata[i].id === id) {
+                        if (alldata[i].role == "user") {
+                            alldata[i].role = "admin"
+                        } else {
+                            alldata[i].role = "user"
+                        }
+                    }
+                }
+                localStorage.setItem("register", JSON.stringify(alldata));
+                viewData();
+            };
+            const logout = () => {
+                localStorage.removeItem('userLogin');
+                window.location.href = 'signin.html';
+            };
+        </script>
+</body>
+
+</html>
